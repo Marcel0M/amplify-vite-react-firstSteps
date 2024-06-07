@@ -8,6 +8,11 @@ import '@aws-amplify/ui-react/styles.css';
 const client = generateClient<Schema>();
 
 function App() {
+
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
+  }
+    
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
   useEffect(() => {
@@ -16,13 +21,9 @@ function App() {
     });
   }, []);
 
+
   function createTodo() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
-  }
-
-    
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
   }
 
   return (
