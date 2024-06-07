@@ -1,17 +1,12 @@
 import { useEffect, useState } from "react";
 import type { Schema } from "../amplify/data/resource";
 import { generateClient } from "aws-amplify/data";
-
-import { Authenticator } from '@aws-amplify/ui-react';
-import '@aws-amplify/ui-react/styles.css';
+import { Authenticator } from '@aws-amplify/ui-react'
+import '@aws-amplify/ui-react/styles.css'
 
 const client = generateClient<Schema>();
 
 function App() {
-
-  function deleteTodo(id: string) {
-    client.models.Todo.delete({ id })
-  }
     
   const [todos, setTodos] = useState<Array<Schema["Todo"]["type"]>>([]);
 
@@ -24,6 +19,11 @@ function App() {
 
   function createTodo() {
     client.models.Todo.create({ content: window.prompt("Todo content") });
+  }
+
+    
+  function deleteTodo(id: string) {
+    client.models.Todo.delete({ id })
   }
 
   return (
